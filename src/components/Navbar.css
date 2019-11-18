@@ -1,0 +1,39 @@
+.Navbar {
+  display: flex;
+  margin: auto;
+}
+
+.ButtonBar {
+  list-style-type: none;
+  display: inline;
+  margin: 50px;
+}
+
+.ButtonBar li {
+  float: left;
+}
+
+.ButtonBar li a {
+  display: block;
+  border: 1px solid black;
+  border-right: none;
+  padding: 16px;
+}
+
+.Request {
+  border-right: 1px solid black;
+}
+
+.Logout {
+  margin-left: 400px;
+  border-right: 1px solid black;
+}
+
+.Activity {
+  text-decoration: underline;
+  color: blue;
+}
+
+img {
+  border: 1px solid black;
+}
