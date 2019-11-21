@@ -20,35 +20,42 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-//GET /activities ส่งกลับข้อมูลกิจกรรมทั้งหมดที่มี
-app.get("/activities", (req, res) => {
-  res.send("All activities");
+//GET /employees ส่งกลับข้อมูล employee ทั้งหมดที่มี
+app.get("/employees", (req, res) => {
+  con.connect(err => {
+    if (err) throw err;
+    console.log("Connected!");
+    let sql = "SELECT * FROM test;";
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      let respond = JSON.stringify(result);
+      console.log(result);
+      res.send(respond);
+    });
+    con.end();
+  });
 });
 
-//GET /activities/:id ส่งกลับข้อมูล activity ที่ตรงกับ id
-app.get("/activities/:id", (req, res) => {
-  res.send("Activities id" + req.params.id);
+//GET /dormitory/:id/employees ส่งกลับข้อมูล employee ที่ตรงกับ dorm id
+app.get("/dormitory/:id/employees", (req, res) => {
+  res.send(`employees id ${req.params.id}`);
 });
 
-//POST /activities สร้าง activity ใหม่
-app.post("/activities", (req, res) => {
-  res.send("Create activities");
+//POST /employees สร้าง employee ใหม่
+app.post("/employees", (req, res) => {
+  res.send("Create employees");
 });
 
-//PUT /activities/:id เพื่อแก้ไขข้อมูล activity ที่ตรงกับ id
-app.put("/activities/:id", (req, res) => {
-  res.send("Update activities id" + req.params.id);
+//PUT /employees/:id เพื่อแก้ไขข้อมูล employee ที่ตรงกับ id
+app.put("/employees/:id", (req, res) => {
+  res.send(`Update employees id ${req.params.id}`);
 });
 
-//DELETE /activities/:id เพื่อลบ activity ที่ตรงกับ id
-app.delete("/activities/:id", (req, res) => {
-  res.send("Delete activities id" + req.params.id);
+//DELETE /employees/:id เพื่อลบ employee ที่ตรงกับ id
+app.delete("/employees/:id", (req, res) => {
+  res.send(`Delete employees id ${req.params.id}`);
 });
 
 app.listen(3000, () => {
   console.log("Start server at port 3000.");
-  con.connect(err => {
-    if (err) throw err;
-    console.log("Connected");
-  });
 });

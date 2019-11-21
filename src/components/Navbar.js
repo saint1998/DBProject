@@ -7,27 +7,46 @@ class Navbar extends Component {
   render() {
     return (
       <div className="Navbar">
-        <img
-          src="http://www.henhunt.co.uk/wp-content/uploads/2014/10/Person-Logo-1.png"
-          height="100"
-        ></img>
         <ul className="ButtonBar">
+          <span>
+            <img
+              src="http://www.henhunt.co.uk/wp-content/uploads/2014/10/Person-Logo-1.png"
+              height="50"
+            />
+            <a>Nathabordine</a>
+          </span>
           <li>
-            <a>Profile</a>
+            <a>
+              <i class="fas fa-id-card"></i>Profile
+            </a>
           </li>
           <li>
-            <a>Student</a>
-          </li>
-          <li className="Activity">
-            <a>Activity</a>
+            <a>
+              <i class="fas fa-graduation-cap"></i>
+              Student
+            </a>
           </li>
           <li>
-            <a>Dormitory</a>
+            <a>
+              <i class="fas fa-cogs"></i>Employee
+            </a>
           </li>
-          <li className="Request">
-            <a>Request</a>
+          <li>
+            <a>
+              <i class="far fa-futbol"></i>Activity
+            </a>
           </li>
-          <li className="Logout">
+          <li>
+            <a>
+              <i class="fas fa-building"></i>Dormitory
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="far fa-newspaper"></i>Request
+            </a>
+          </li>
+          <li>
             <a>Log out</a>
           </li>
         </ul>

@@ -1,39 +1,56 @@
-.Navbar {
+/* .Navbar {
   display: flex;
   margin: auto;
-}
+} */
 
 .ButtonBar {
-  list-style-type: none;
+  /* list-style-type: none;
   display: inline;
-  margin: 50px;
+  margin: 50px; */
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(134, 131, 131);
+  overflow-x: hidden;
+  margin-top: 0px;
+  padding-top: 20px;
+  padding-left: 0px;
 }
 
-.ButtonBar li {
-  float: left;
+.ButtonBar span {
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  display: flex;
+  list-style-type: none;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}
+
+.ButtonBar span a {
+  padding: 40px 0px 0px 8px;
+  font-size: 20px;
+}
+
+.ButtonBar span img {
+  padding: 2px 0px 0px 4px;
+}
+
+ul.ButtonBar {
+  list-style-type: none;
 }
 
 .ButtonBar li a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  border: 1px solid black;
+  border-bottom: none;
+  font-size: 22px;
+  color: #0e0d0d;
   display: block;
-  border: 1px solid black;
-  border-right: none;
-  padding: 16px;
-}
-
-.Request {
-  border-right: 1px solid black;
-}
-
-.Logout {
-  margin-left: 400px;
-  border-right: 1px solid black;
-}
-
-.Activity {
-  text-decoration: underline;
-  color: blue;
-}
-
-img {
-  border: 1px solid black;
+  transition: 0.3s;
 }
