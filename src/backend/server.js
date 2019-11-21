@@ -44,6 +44,7 @@ app.get("/dormitory/:id/employees", (req, res) => {
 //POST /employees สร้าง employee ใหม่
 app.post("/employees", (req, res) => {
   //เวลา front ส่งมา จะส่งมาเป็น json โดยข้อมูลจะอยู่ใน req.body สมมติว่าใน body เป็น {"name":"test"} req.body.name ก็คือ test
+  //test merge
   console.log(req.body.name);
   res.send("Create employees");
 });
