@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "12345678",
-  database: "testdb"
+  password: "password",
+  database: "dorm"
 });
 
 app.get("/", (req, res) => {
@@ -25,7 +25,7 @@ app.get("/employees", (req, res) => {
   con.connect(err => {
     if (err) throw err;
     console.log("Connected!");
-    let sql = "SELECT * FROM test;";
+    let sql = "SELECT * FROM EMPLOYEE;";
     con.query(sql, (err, result) => {
       if (err) throw err;
       let respond = JSON.stringify(result);
@@ -56,7 +56,18 @@ app.put("/employees/:id", (req, res) => {
 
 //DELETE /employees/:id เพื่อลบ employee ที่ตรงกับ id
 app.delete("/employees/:id", (req, res) => {
-  res.send(`Delete employees id ${req.params.id}`);
+  con.connect(err => {
+    if (err) throw err;
+    console.log("Connected!");
+    let sql = "DELETE FROM EMPLOYEE WHERE Ssn = " + req.params.id;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      //let respond = JSON.stringify(result);
+      console.log(result);
+      res.send('Employee ' + req.params.id + ' is Deleted');
+    });
+    con.end();
+  });
 });
 
 app.listen(3000, () => {
