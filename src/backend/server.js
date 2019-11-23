@@ -45,8 +45,18 @@ app.get("/dormitory/:id/employees", (req, res) => {
 app.post("/employees", (req, res) => {
   //เวลา front ส่งมา จะส่งมาเป็น json โดยข้อมูลจะอยู่ใน req.body สมมติว่าใน body เป็น {"name":"test"} req.body.name ก็คือ test
   //test merge
-  console.log(req.body.name);
-  res.send("Create employees");
+  con.connect(err => {
+    if (err) throw err;
+    let sql = "insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Startdate,Dormitory_id) values (req.body.Ssn,req.body.First_name, req.body.Position, req.body.Phone_number, req.body.Birthdate, req.body.Address, req.body.Startdate, req.body.Dormitory_id)";
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      let respond = JSON.stringify(result);
+      console.log(req.body.name);
+      res.send("Create employees");
+    });
+    con.end();
+  });
+  
 });
 
 //PUT /employees/:id เพื่อแก้ไขข้อมูล employee ที่ตรงกับ id
