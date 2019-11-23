@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `dorm`.`PARENT` (
   
   CONSTRAINT `fk_PARENT_STUDENT1`
     FOREIGN KEY (`Student_id`) REFERENCES `dorm`.`STUDENT` (`Id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -231,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `dorm`.`VISITOR` (
   CONSTRAINT `fk_VISITOR_STUDENT1`
     FOREIGN KEY (`Student_id`)
     REFERENCES `dorm`.`STUDENT` (`Id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `dorm`.`PAYMENT_HISTORY` (
   CONSTRAINT `fk_PAYMENT_HISTORY_STUDENT1`
     FOREIGN KEY (`Student_id`)
     REFERENCES `dorm`.`STUDENT` (`Id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -334,11 +334,11 @@ CREATE TABLE IF NOT EXISTS `dorm`.`REQUEST_HISTORY` (
   
   CONSTRAINT `fk_REQUEST_HISTORY_STUDENT1`
     FOREIGN KEY (`Student_id`) REFERENCES `dorm`.`STUDENT` (`Id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_REQUEST_HISTORY_EMPLOYEE1`
     FOREIGN KEY (`Employee_ssn`) REFERENCES `dorm`.`EMPLOYEE` (`Ssn`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -356,12 +356,12 @@ CREATE TABLE IF NOT EXISTS `dorm`.`STUDENT_ACTIVITY` (
   
   CONSTRAINT `fk_STUDENT_ACTIVITY_STUDENT1`
     FOREIGN KEY (`Student_id`) REFERENCES `dorm`.`STUDENT` (`Id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
     
   CONSTRAINT `fk_STUDENT_ACTIVITY_ACTIVITY1`
     FOREIGN KEY (`Activity_id`,`Activity_date`) REFERENCES `dorm`.`ACTIVITY` (`Id`,`Date`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -376,6 +376,39 @@ CREATE TABLE IF NOT EXISTS `dorm`.`POSITION` (
   
   PRIMARY KEY (`Position`))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- ADD TRIGGERS FOR INSERT, UPDATE EMPLOYEE
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+
+DELIMITER $$
+CREATE 
+	TRIGGER `trg_employee_insert` AFTER INSERT ON `EMPLOYEE`
+	FOR EACH ROW BEGIN
+		INSERT INTO dorm.WORK_HISTORY
+		VALUE (NEW.Ssn, NEW.Start_date, NEW.Position, NULL, NEW.Dormitory_id);
+    END$$
+    
+CREATE 
+	TRIGGER `trg_employee_update` AFTER UPDATE ON `EMPLOYEE`
+	FOR EACH ROW BEGIN
+    
+		UPDATE `WORK_HISTORY` 
+		SET End_date = CURDATE()  
+		WHERE Employee_ssn = NEW.Ssn AND End_date is NULL;
+        
+        INSERT INTO dorm.WORK_HISTORY
+		VALUE (NEW.Ssn, CURDATE(), NEW.Position, NULL, NEW.Dormitory_id);
+    END$$
+
+DELIMITER ;
+
+SET SQL_SAFE_UPDATES = 0;
+
+
 
 -- -----------------------------------------------------
 -- -----------------------------------------------------
@@ -431,9 +464,9 @@ INSERT INTO REQUEST_HISTORY
 VALUE ('1', '2019-11-22', 'VISITOR', 'Approved', 'My mother will come to visit me.', '6000000001', '1000000000001'),
 	('2', '2019-11-22', 'MAINTENANCE', 'Rejected', 'My table leg is broken.', '6000000002', '1000000000002');
     
-INSERT INTO WORK_HISTORY
-VALUE ('1000000000001', '2019-11-22', 'Repair Man', NULL, '1'),
-	('1000000000002', '2019-11-22', 'Officer', '2019-11-23', '2');
+-- INSERT INTO WORK_HISTORY #AUTO INSERT BY TRIGGER
+-- VALUE ('1000000000001', '2019-11-22', 'Repair Man', NULL, '1'),
+-- 	('1000000000002', '2019-11-22', 'Officer', '2019-11-23', '2');
     
 INSERT INTO ATTEND_HISTORY
 VALUE ('6000000001', '2019-11-22', 'IN'),
