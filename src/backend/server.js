@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "12345678",
-  database: "testdb"
+  password: "tangtai2541",
+  database: "dorm"
 });
 
 app.get("/", (req, res) => {
@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 
 //GET /employees ส่งกลับข้อมูล employee ทั้งหมดที่มี
 app.get("/employees", (req, res) => {
+  console.log("Connected!");
   con.connect(err => {
     if (err) throw err;
     console.log("Connected!");
@@ -45,19 +46,25 @@ app.get("/dormitory/:id/employees", (req, res) => {
 app.post("/employees", (req, res) => {
   //เวลา front ส่งมา จะส่งมาเป็น json โดยข้อมูลจะอยู่ใน req.body สมมติว่าใน body เป็น {"name":"test"} req.body.name ก็คือ test
   //test merge
+  console.log("0");
   con.connect(err => {
+    console.log("1");
     if (err) throw err;
-    let sql = "insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Startdate,Dormitory_id) values (req.body.Ssn,req.body.First_name, req.body.Position, req.body.Phone_number, req.body.Birthdate, req.body.Address, req.body.Startdate, req.body.Dormitory_id)";
+    console.log("2");
+    let sql = `insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Start_date,Dormitory_id) values ("${req.body.Ssn}","${req.body.First_name}","${req.body.Last_name}", "${req.body.Position}", "${req.body.Phone_number}", "${req.body.Birthdate}", "${req.body.Address}", "${req.body.Start_date}","${req.body.Dormitory_id}")`;
+    console.log("3");
     con.query(sql, (err, result) => {
+      console.log("4");
       if (err) throw err;
-      if(req.body.Ssn.length!=13) throw err;
-      if(req.body.Phone_number.length!=10) throw err;
+      console.log("5");
       let respond = JSON.stringify(result);
       console.log(req.body.name);
       res.send("Create employees");
+      //con.end();
     });
     con.end();
   });
+  console.log("7");
   
 });
 
