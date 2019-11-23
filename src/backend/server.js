@@ -50,6 +50,8 @@ app.post("/employees", (req, res) => {
     let sql = "insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Startdate,Dormitory_id) values (req.body.Ssn,req.body.First_name, req.body.Position, req.body.Phone_number, req.body.Birthdate, req.body.Address, req.body.Startdate, req.body.Dormitory_id)";
     con.query(sql, (err, result) => {
       if (err) throw err;
+      if(req.body.Ssn.length!=13) throw err;
+      if(req.body.Phone_number.length!=10) throw err;
       let respond = JSON.stringify(result);
       console.log(req.body.name);
       res.send("Create employees");
