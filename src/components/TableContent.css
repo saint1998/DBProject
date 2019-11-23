@@ -1,0 +1,36 @@
+div.TableContent {
+  padding: 50px 150px 50px 300px;
+}
+
+button {
+  font-size: 13px;
+}
+
+div.TableContent .CreateButton {
+  float: right;
+  margin: 20px 10px 0px 0px;
+}
+
+div.TableContent .Table {
+  border: 1px solid black;
+  height: 300px;
+}
+
+div.TableContent .Table .Header {
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+}
+
+div.TableContent .Table .Content {
+}
+
+div.TableContent .Table .Content .data {
+  border-bottom: solid 1px black;
+  padding: 10px;
+}
+
+div.TableContent .Table .Content .data button {
+  float: right;
+}

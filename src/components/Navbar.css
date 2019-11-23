@@ -11,13 +11,44 @@
   width: 240px;
   position: fixed;
   z-index: 1;
-  top: 0;
+  top: 20;
   left: 0;
   background-color: rgb(134, 131, 131);
   overflow-x: hidden;
   margin-top: 0px;
   padding-top: 20px;
   padding-left: 0px;
+}
+
+.TopBar {
+  background-color: rgb(134, 131, 131);
+  overflow: hidden;
+  padding: 10px 0px 10px 0px;
+  z-index: 1;
+  top: 0px;
+  margin: -10px -10px 0px -10px;
+}
+
+.TopBar .SearchBar {
+  float: right;
+  margin-right: 125px;
+}
+
+.TopBar input[type="text"] {
+  font-size: 17px;
+}
+
+.TopBar button {
+  border: 1px solid rgb(168, 168, 168);
+  background-color: rgb(168, 168, 168);
+  border-top: none;
+}
+
+.TopBar i {
+  cursor: pointer;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 20px;
 }
 
 .ButtonBar span {
@@ -28,7 +59,7 @@
   display: flex;
   list-style-type: none;
   margin-bottom: 20px;
-  margin-left: 15px;
+  margin-left: 25px;
 }
 
 .ButtonBar span a {
@@ -53,4 +84,8 @@ ul.ButtonBar {
   color: #0e0d0d;
   display: block;
   transition: 0.3s;
+}
+
+.ButtonBar li a:hover {
+  color: white;
 }

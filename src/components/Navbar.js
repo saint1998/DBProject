@@ -7,6 +7,14 @@ class Navbar extends Component {
   render() {
     return (
       <div className="Navbar">
+        <div className="TopBar">
+          <div className="SearchBar">
+            <input type="text" placeholder="Search.." />
+            <button type="submit">
+              <i className="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
         <ul className="ButtonBar">
           <span>
             <img
@@ -17,33 +25,33 @@ class Navbar extends Component {
           </span>
           <li>
             <a>
-              <i class="fas fa-id-card"></i>Profile
+              <i className="fas fa-id-card"></i>Profile
             </a>
           </li>
           <li>
             <a>
-              <i class="fas fa-graduation-cap"></i>
+              <i className="fas fa-graduation-cap"></i>
               Student
             </a>
           </li>
           <li>
             <a>
-              <i class="fas fa-cogs"></i>Employee
+              <i className="fas fa-cogs"></i>Employee
             </a>
           </li>
           <li>
             <a>
-              <i class="far fa-futbol"></i>Activity
+              <i className="far fa-futbol"></i>Activity
             </a>
           </li>
           <li>
             <a>
-              <i class="fas fa-building"></i>Dormitory
+              <i className="fas fa-building"></i>Dormitory
             </a>
           </li>
           <li>
             <a>
-              <i class="far fa-newspaper"></i>Request
+              <i className="far fa-newspaper"></i>Request
             </a>
           </li>
           <li>
