@@ -425,9 +425,11 @@ VALUE ('Repair Man', '30000'),
 	('Officer', '25000');
 
 INSERT INTO DORMITORY
-VALUE ('1', 'Dorm A', '400', '1200', 'GOOD DORM', '7', '20', '4000', NULL),
-	('2', 'Dorm B', '450', '1350', 'THE DORM THAT BETTER THAT DORM A', '7', '20', '4500', NULL),
-    ('3', 'Dormitory C', '500', '1500', 'THE BEST DORM EVER', '7', '20', '5000', NULL);
+VALUE ('1', 'Chuan Chom', '400', '1200', 'GOOD DORM', '7', '20', '4000', NULL),
+	('2', 'Jum Pee', '450', '1350', 'THE DORM THAT BETTER THAN DORM A', '7', '20', '4500', NULL),
+    ('3', 'Jum Paa', '500', '1500', 'THE BEST DORM EVER', '7', '20', '5000', NULL),
+    ('4', 'Put Tarn', '550', '1650', 'THE BRAND NEW DORM', '7', '20', '5500', NULL),
+    ('5', 'Put Sorn', '600', '1800', 'THE BRAND NEW DORM V2', '7', '20', '6000', NULL);
     
 INSERT INTO ROOM
 VALUE ('110', '1', '10', '200'),
@@ -444,7 +446,17 @@ VALUE ('110', '1', '10', '200'),
 	('210', '3', '15', '300'),
 	('310', '3', '15', '300'),
     ('410', '3', '15', '300'),
-	('510', '3', '15', '300');
+	('510', '3', '15', '300'),
+    ('110', '4', '15', '300'),
+	('210', '4', '15', '300'),
+	('310', '4', '15', '300'),
+    ('410', '4', '15', '300'),
+	('510', '4', '15', '300'),
+    ('110', '5', '15', '300'),
+	('210', '5', '15', '300'),
+	('310', '5', '15', '300'),
+    ('410', '5', '15', '300'),
+	('510', '5', '15', '300');
     
 INSERT INTO EMPLOYEE
 VALUE ('1200000000001', 'Maew-a-raikodsao', 'Maewterkordernjakpai', 'Repair Man', '0800000001', '1999-11-01', 'Yak-a-sokhodsus', '2019-11-01', '1'),
@@ -475,7 +487,7 @@ VALUE ('1300000000001', 'First', 'Kung', '0890000001', '6000000001'),
 	('1300000000002', 'Faii', 'Kung', '0890000001', '6000000002');
     
 INSERT INTO VISITOR
-VALUE ('1400000000001', '2019-11-25', '6000000001', 'Khem', 'Kung', 'Mother', '0890000005', 'Very missing him'),
+VALUE ('1400000000001', '2019-11-25', '6000000001', 'Khem', 'Kung', 'Mother', '0890000005', 'Very miss him'),
 	('1400000000002', '2019-11-25', '6000000002', 'Frong', 'Kung', 'Father', '0890000005', 'Miss him so much');
     
 INSERT INTO PAYMENT_HISTORY
