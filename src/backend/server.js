@@ -13,7 +13,7 @@ const con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "12345678",
-  database: "testdb"
+  database: "dorm"
 });
 
 app.get("/", (req, res) => {
@@ -37,7 +37,7 @@ app.get("/employees", (req, res) => {
 });
 
 //GET /dormitory/:id/employees ส่งกลับข้อมูล employee ที่ตรงกับ dorm id
-app.get("/dormitory/:id/employees", (req, res) => {
+app.get("/dormitories/:id/employees", (req, res) => {
   con.connect(err => {
     if (err) throw err;
     console.log("Connected!");
