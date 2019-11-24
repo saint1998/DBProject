@@ -41,7 +41,9 @@ app.get("/dormitory/:id/employees", (req, res) => {
   con.connect(err => {
     if (err) throw err;
     console.log("Connected!");
-    let sql =  "SELECT * FROM EMPLOYEE  USE INDEX(em_dorm) WHERE Dormitory_id = "+req.params.id;
+    let sql =
+      "SELECT * FROM EMPLOYEE  USE INDEX(em_dorm) WHERE Dormitory_id = " +
+      req.params.id;
     con.query(sql, (err, result) => {
       if (err) throw err;
       let respond = JSON.stringify(result);
