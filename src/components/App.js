@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { fetchEmployees, fetchDormitories } from "../actions";
 import Navbar from "./Navbar";
 import TableContent from "./TableContent";
+import history from "../history";
 import "./App.css";
 
 class App extends Component {
   state = {};
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className="App">
-          <Navbar />
+          <Navbar onClickNavbar={this.onClickNavbar} />
           <Switch>
             <Route path="/employees">
               <TableContent data={this.props.employees} header="Employee" />
@@ -23,7 +24,7 @@ class App extends Component {
             </Route>
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 
@@ -31,6 +32,15 @@ class App extends Component {
     this.props.fetchEmployees();
     this.props.fetchDormitories();
   }
+
+  onClickNavbar = button => {
+    switch (button) {
+      case "employee":
+        return history.push("/employees");
+      case "dormitory":
+        return history.push("/dormitories");
+    }
+  };
 }
 
 const mapStateToProps = state => {

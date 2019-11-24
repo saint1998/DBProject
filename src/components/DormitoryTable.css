@@ -1,0 +1,6 @@
+.EmployeeTable {
+  border: solid 1px black;
+  margin: 10px;
+  overflow-x: scroll;
+  height: 200px;
+}

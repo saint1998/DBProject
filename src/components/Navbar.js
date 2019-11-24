@@ -35,7 +35,7 @@ class Navbar extends Component {
             </a>
           </li>
           <li>
-            <a>
+            <a onClick={() => this.onClickButton("employee")}>
               <i className="fas fa-cogs"></i>Employee
             </a>
           </li>
@@ -45,7 +45,7 @@ class Navbar extends Component {
             </a>
           </li>
           <li>
-            <a>
+            <a onClick={() => this.onClickButton("dormitory")}>
               <i className="fas fa-building"></i>Dormitory
             </a>
           </li>
@@ -61,6 +61,10 @@ class Navbar extends Component {
       </div>
     );
   }
+
+  onClickButton = button => {
+    this.props.onClickNavbar(button);
+  };
 }
 
 export default Navbar;

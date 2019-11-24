@@ -13,7 +13,6 @@ div.TableContent .CreateButton {
 
 div.TableContent .Table {
   border: 1px solid black;
-  height: 300px;
 }
 
 div.TableContent .Table .Header {
@@ -24,6 +23,8 @@ div.TableContent .Table .Header {
 }
 
 div.TableContent .Table .Content {
+  overflow-y: scroll;
+  height: 300px;
 }
 
 div.TableContent .Table .Content .data {
@@ -35,6 +36,7 @@ div.TableContent .Table .Content .data button {
   float: right;
   cursor: pointer;
   outline: white;
+  user-select: none;
 }
 
 div.TableContent .Table .Content .data .Popup {

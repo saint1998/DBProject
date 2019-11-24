@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //อย่าลืมแก้ user password database
-const con = mysql.createConnection({
+const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "12345678",
@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 //GET /employees ส่งกลับข้อมูล employee ทั้งหมดที่มี
 app.get("/employees", (req, res) => {
-  con.connect(err => {
+  pool.getConnection((err, con) => {
     if (err) throw err;
     console.log("Connected!");
     let sql = "SELECT * FROM EMPLOYEE";
@@ -30,15 +30,30 @@ app.get("/employees", (req, res) => {
       if (err) throw err;
       let response = JSON.stringify(result);
       console.log(result);
-      res.send(respond);
+      res.send(response);
     });
-    con.end();
+    con.release();
+  });
+});
+
+app.get("/dormitories", (req, res) => {
+  pool.getConnection((err, con) => {
+    if (err) throw err;
+    console.log("Connected!");
+    let sql = "SELECT * FROM DORMITORY";
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      let response = JSON.stringify(result);
+      console.log(result);
+      res.send(response);
+    });
+    con.release();
   });
 });
 
 //GET /dormitory/:id/employees ส่งกลับข้อมูล employee ที่ตรงกับ dorm id
 app.get("/dormitories/:id/employees", (req, res) => {
-  con.connect(err => {
+  pool.getConnection((err, con) => {
     if (err) throw err;
     console.log("Connected!");
     let sql =
@@ -50,7 +65,7 @@ app.get("/dormitories/:id/employees", (req, res) => {
       console.log(result);
       res.send(response);
     });
-    con.end();
+    con.release();
   });
 });
 
@@ -58,45 +73,39 @@ app.get("/dormitories/:id/employees", (req, res) => {
 app.post("/employees", (req, res) => {
   //เวลา front ส่งมา จะส่งมาเป็น json โดยข้อมูลจะอยู่ใน req.body สมมติว่าใน body เป็น {"name":"test"} req.body.name ก็คือ test
   //test merge
-  con.connect(err => {
+  pool.getConnection((err, con) => {
     if (err) throw err;
     let sql = `insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Start_date,Dormitory_id) values ("${req.body.Ssn}","${req.body.First_name}","${req.body.Last_name}", "${req.body.Position}", "${req.body.Phone_number}", "${req.body.Birthdate}", "${req.body.Address}", "${req.body.Start_date}","${req.body.Dormitory_id}")`;
     con.query(sql, (err, result) => {
       if (err) throw err;
       let response = JSON.stringify(result);
-      console.log(req.body.name);
       res.send("Create employees");
-      //con.end();
     });
-    con.end();
+    con.release();
   });
 });
 
 //PUT /employees/:id เพื่อแก้ไขข้อมูล employee ที่ตรงกับ id
 app.put("/employees/:id", (req, res) => {
-  con.connect(err => {
+  pool.getConnection((err, con) => {
     if (err) throw err;
     console.log("Connected!");
     let emp = req.body;
     console.log(emp);
-    console.log(`employee name : ${emp.First_name}`);
-    let sql = `UPDATE EMPLOYEE SET Position = "${emp.Position}", \
-                                    Dormitory_id = "${emp.Dormitory_id}" \
-                                WHERE Ssn = ${req.params.id};`;
+    let sql = `UPDATE EMPLOYEE SET Position = "${emp.Position}",Dormitory_id = "${emp.Dormitory_id}"WHERE Ssn = "${req.params.id}";`;
     console.log(sql);
     con.query(sql, (err, result) => {
-      if (err) throw err;
-      //let respond = JSON.stringify(result);
+      if (err) return res.status(400).send("Cannot update");
       console.log(result);
       res.send(`Employee ${req.params.id} is Updated`);
     });
-    con.end();
+    con.release();
   });
 });
 
 //DELETE /employees/:id เพื่อลบ employee ที่ตรงกับ id
 app.delete("/employees/:id", (req, res) => {
-  con.connect(err => {
+  pool.getConnection((err, con) => {
     if (err) throw err;
     console.log("Connected!");
     let sql = "DELETE FROM EMPLOYEE WHERE Ssn = " + req.params.id;
@@ -106,10 +115,10 @@ app.delete("/employees/:id", (req, res) => {
       console.log(result);
       res.send("Employee " + req.params.id + " is Deleted");
     });
-    con.end();
+    con.release();
   });
 });
 
-app.listen(3000, () => {
-  console.log("Start server at port 3000.");
+app.listen(8000, () => {
+  console.log("Start server at port 8000.");
 });
