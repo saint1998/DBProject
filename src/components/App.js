@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { fetchEmployees } from "../actions";
-import { fetchDormitories } from "../actions";
+import { fetchEmployees, fetchDormitories } from "../actions";
 import Navbar from "./Navbar";
 import TableContent from "./TableContent";
 import "./App.css";

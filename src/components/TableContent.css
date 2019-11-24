@@ -33,4 +33,10 @@ div.TableContent .Table .Content .data {
 
 div.TableContent .Table .Content .data button {
   float: right;
+  cursor: pointer;
+  outline: white;
+}
+
+div.TableContent .Table .Content .data .Popup {
+  width: auto;
 }
