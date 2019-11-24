@@ -74,12 +74,40 @@ app.post("/employees", (req, res) => {
 
 //PUT /employees/:id เพื่อแก้ไขข้อมูล employee ที่ตรงกับ id
 app.put("/employees/:id", (req, res) => {
-  res.send(`Update employees id ${req.params.id}`);
+  con.connect(err => {
+    if (err) throw err;
+    console.log("Connected!");
+    let emp = req.body;
+    console.log(emp);
+    console.log(`employee name : ${emp.First_name}`);
+    let sql = `UPDATE EMPLOYEE SET Position = "${emp.Position}", \
+                                    Dormitory_id = "${emp.Dormitory_id}" \
+                                WHERE Ssn = ${req.params.id};`;
+    console.log(sql);
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      //let respond = JSON.stringify(result);
+      console.log(result);
+      res.send(`Employee ${req.params.id} is Updated`);
+    });
+    con.end();
+  });
 });
 
 //DELETE /employees/:id เพื่อลบ employee ที่ตรงกับ id
 app.delete("/employees/:id", (req, res) => {
-  res.send(`Delete employees id ${req.params.id}`);
+  con.connect(err => {
+    if (err) throw err;
+    console.log("Connected!");
+    let sql = "DELETE FROM EMPLOYEE WHERE Ssn = " + req.params.id;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      //let respond = JSON.stringify(result);
+      console.log(result);
+      res.send("Employee " + req.params.id + " is Deleted");
+    });
+    con.end();
+  });
 });
 
 app.listen(3000, () => {
