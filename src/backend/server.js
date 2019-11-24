@@ -25,7 +25,7 @@ app.get("/employees", (req, res) => {
   con.connect(err => {
     if (err) throw err;
     console.log("Connected!");
-    let sql = "SELECT * FROM test;";
+    let sql = "SELECT * FROM EMPLOYEE";
     con.query(sql, (err, result) => {
       if (err) throw err;
       let respond = JSON.stringify(result);
@@ -38,7 +38,18 @@ app.get("/employees", (req, res) => {
 
 //GET /dormitory/:id/employees ส่งกลับข้อมูล employee ที่ตรงกับ dorm id
 app.get("/dormitory/:id/employees", (req, res) => {
-  res.send(`employees id ${req.params.id}`);
+  con.connect(err => {
+    if (err) throw err;
+    console.log("Connected!");
+    let sql =  "SELECT * FROM EMPLOYEE  USE INDEX(em_dorm) WHERE Dormitory_id = "+req.params.id;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      let respond = JSON.stringify(result);
+      console.log(result);
+      res.send(respond);
+    });
+    con.end();
+  });
 });
 
 //POST /employees สร้าง employee ใหม่
