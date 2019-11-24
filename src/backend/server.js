@@ -28,7 +28,7 @@ app.get("/employees", (req, res) => {
     let sql = "SELECT * FROM EMPLOYEE";
     con.query(sql, (err, result) => {
       if (err) throw err;
-      let respond = JSON.stringify(result);
+      let response = JSON.stringify(result);
       console.log(result);
       res.send(respond);
     });
@@ -46,9 +46,9 @@ app.get("/dormitories/:id/employees", (req, res) => {
       req.params.id;
     con.query(sql, (err, result) => {
       if (err) throw err;
-      let respond = JSON.stringify(result);
+      let response = JSON.stringify(result);
       console.log(result);
-      res.send(respond);
+      res.send(response);
     });
     con.end();
   });
@@ -58,8 +58,18 @@ app.get("/dormitories/:id/employees", (req, res) => {
 app.post("/employees", (req, res) => {
   //เวลา front ส่งมา จะส่งมาเป็น json โดยข้อมูลจะอยู่ใน req.body สมมติว่าใน body เป็น {"name":"test"} req.body.name ก็คือ test
   //test merge
-  console.log(req.body.name);
-  res.send("Create employees");
+  con.connect(err => {
+    if (err) throw err;
+    let sql = `insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Start_date,Dormitory_id) values ("${req.body.Ssn}","${req.body.First_name}","${req.body.Last_name}", "${req.body.Position}", "${req.body.Phone_number}", "${req.body.Birthdate}", "${req.body.Address}", "${req.body.Start_date}","${req.body.Dormitory_id}")`;
+    con.query(sql, (err, result) => {
+      if (err) throw err;
+      let response = JSON.stringify(result);
+      console.log(req.body.name);
+      res.send("Create employees");
+      //con.end();
+    });
+    con.end();
+  });
 });
 
 //PUT /employees/:id เพื่อแก้ไขข้อมูล employee ที่ตรงกับ id
