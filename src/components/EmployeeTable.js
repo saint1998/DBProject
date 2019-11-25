@@ -184,7 +184,6 @@ class EmployeeTable extends Component {
     if (window.confirm(`Are You Sure to Delete ${name} from EMPLOYEE`)) {
       this.props.deleteEmployee(id);
       this.props.fetchEmployees();
-      window.location.reload();
     } else {
       return;
     }
@@ -226,10 +225,10 @@ class EmployeeTable extends Component {
       return window.alert("Phone Number must be 10 digits");
     }
     if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(Birthdate)) {
-      return window.alert('Birth Date must be in form "YYYY/MM/DD"');
+      return window.alert('Birth Date must be in form "YYYY-MM-DD"');
     }
     if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(Start_date)) {
-      return window.alert('Start Date must be in form "YYYY/MM/DD"');
+      return window.alert('Start Date must be in form "YYYY-MM-DD"');
     }
     if (!Address) {
       return window.alert("Please Enter Address");
@@ -247,7 +246,6 @@ class EmployeeTable extends Component {
     };
     this.props.createEmployee(data);
     close();
-    window.location.reload();
   };
 }
 

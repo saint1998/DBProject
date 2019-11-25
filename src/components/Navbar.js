@@ -8,12 +8,7 @@ class Navbar extends Component {
     return (
       <div className="Navbar">
         <div className="TopBar">
-          <div className="SearchBar">
-            <input type="text" placeholder="Search.." />
-            <button type="submit">
-              <i className="fas fa-search"></i>
-            </button>
-          </div>
+          <div className="SearchBar"></div>
         </div>
         <ul className="ButtonBar">
           <span>
@@ -21,7 +16,7 @@ class Navbar extends Component {
               src="http://www.henhunt.co.uk/wp-content/uploads/2014/10/Person-Logo-1.png"
               height="50"
             />
-            <a>Nathabordine</a>
+            <a>Admin</a>
           </span>
           <li>
             <a>

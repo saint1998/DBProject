@@ -74,7 +74,7 @@ app.post("/employees", (req, res) => {
   //เวลา front ส่งมา จะส่งมาเป็น json โดยข้อมูลจะอยู่ใน req.body สมมติว่าใน body เป็น {"name":"test"} req.body.name ก็คือ test
   //test merge
   pool.getConnection((err, con) => {
-    if (err) throw err;
+    if (err) console.log(err);
     let sql = `insert into EMPLOYEE (Ssn, First_name, Last_name, Position, Phone_number,Birthdate,Address,Start_date,Dormitory_id) values ("${req.body.Ssn}","${req.body.First_name}","${req.body.Last_name}", "${req.body.Position}", "${req.body.Phone_number}", "${req.body.Birthdate}", "${req.body.Address}", "${req.body.Start_date}","${req.body.Dormitory_id}")`;
     con.query(sql, (err, result) => {
       if (err) throw err;

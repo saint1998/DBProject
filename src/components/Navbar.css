@@ -75,6 +75,10 @@ ul.ButtonBar {
   list-style-type: none;
 }
 
+ul.ButtonBar li {
+  cursor: pointer;
+}
+
 .ButtonBar li a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
